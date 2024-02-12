@@ -1,0 +1,54 @@
+1. laravel telepítése: composer create-project laravel/laravel laravel-breeze-api
+2.
+breeze telepítése:  composer require laravel/breeze --dev
+3. react frontend:  php artisan breeze:install
+
+4. Ezután megkérdezi: 
+
+ Which Breeze stack would you like to install?
+  Blade with Alpine ..................................... blade
+  Livewire (Volt Class API) with Alpine ................. livewire
+  Livewire (Volt Functional API) with Alpine ............ livewire-functional
+  React with Inertia .................................... react
+  Vue with Inertia ...................................... vue
+  API only .............................................. api
+❯ api
+
+  Which testing framework do you prefer? [PHPUnit]
+  PHPUnit ....... 0
+  Pest .......... 1
+❯ 0
+5. A database/seeders/DatabaseSeedes.php fájlban szedjük ki a megjegyzést a sorok elől, és migráljuk az adatbázist
+php artisan migrate:fresh --seed
+
+6. Az auth.php-ban vannak a használandó végpontok. Ehhez kell elkészíteni a bejelentkező formot. 
+
+7. env. php ban be kell állítani a forntend elérés értékeit: 
+APP_URL=http://localhost:8000
+FRONTEND_URL=http://localhost:5173
+SANCTUM_STATEFUL_DOMAINS=localhost:5713
+SESSION_DOMAIN=localhost
+
+
+/********************************** FRONTEND LÉTREHOZÁSA ***********************************/
+1. npx create-react-app react_frontend
+
+2. Nyissuk meg VS kódban és indítsuk el.  npm start
+
+
+3. telepítsük a react routert: https://reactrouter.com/en/main/start/tutorial
+npm install react-router-dom
+4. A bootstrap-et
+npm install react-bootstrap bootstrap
+5. axiost
+npm install axios
+
+importáljuk a fenti csomagokat a megfelelő fájlokban: 
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import axios from "axios";
+import { BrowserRouter, Route, Router } from "react-router-dom";
+
+
+
+
