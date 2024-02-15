@@ -14,9 +14,8 @@ function App() {
             <div className="p-5">
                 <Routes>
                     <Route path="/" element={<Home />} />
-
-                    <Route path="login" element={<Login />} />
-                    <Route path="register" element={<Register />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
                     <Route path="*" element={<NoPage />} />
                 </Routes>
             </div>
