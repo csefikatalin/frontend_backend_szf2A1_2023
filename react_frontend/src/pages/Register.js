@@ -1,40 +1,21 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "../api/axios";
+
+import useAuthContext from "../context/AuthContex";
 export default function Register() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [password_confirmation, setPasswordConfirmation] = useState("");
-    const [errors, setErrors] = useState([]);
+    const { login, errors } = useAuthContext();
 
-    const navigate = useNavigate();
-    const csrf = () => axios.get("/sanctum/csrf-cookie");
     const handleRegister = async (e) => {
         e.preventDefault();
-        await csrf();
-        try {
-            await axios.post("/register", {
-                name: name,
-                email: email,
-                password: password,
-                password_confirmation: password_confirmation,
-            });
-            setName("");
-            setEmail("");
-            setPassword("");
-            setPasswordConfirmation("");
-            navigate("/");
-        } catch (e) {
-            if (e.response.status === 422) {
-                setErrors(e.response.data.errors);
-                
-            }
-            if (e.response.status === 419) {
-               
-                console.log(errors)
-            }
-        }
+        login({
+            name: name,
+            email: email,
+            password: password,
+            password_confirmation: password_confirmation,
+        });
     };
 
     return (

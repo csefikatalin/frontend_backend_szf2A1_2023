@@ -1,33 +1,19 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "../api/axios";
+import { Link } from "react-router-dom";
+import useAuthContext from "../context/AuthContex";
+
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [errors, setErrors] = useState([]);
-    const navigate = useNavigate();
+    
+    const {login,errors} =useAuthContext();
 
-    const csrf = ()=>axios.get("/sanctum/csrf-cookie")
+   
 
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        await csrf()
-        try {
-            await axios.post("/login", { email: email, password: password });
-            setEmail("");
-            setPassword("");
-            navigate("/");
-        } catch (e) {
-            if (e.response.status === 422) {
-                setErrors(e.response.data.errors);
-                console.log(errors)
-            }
-            if (e.response.status === 419) {
-               
-                console.log(errors)
-            }
-        }
+        login({email,password})
     };
     return (
         <div className=" m-auto" style={{ maxWidth: "400px" }}>
